@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 export default class UserService {
 
-  static async getUserById(id: string) {
+  static async getUserById(id: string): Promise<User | undefined>{
     const user = await prisma.user.findUnique({
       where: {
         id: id
@@ -13,7 +13,7 @@ export default class UserService {
     return user || undefined
   }
 
-  static async getUserByEmail(email: string) {
+  static async getUserByEmail(email: string): Promise<User | undefined>{
     const user = await prisma.user.findUnique({
       where: {
         email: email
@@ -22,7 +22,7 @@ export default class UserService {
     return user || undefined
   }
 
-  static async createUser(name:string, email:string, password:string) {
+  static async createUser(name:string, email:string, password:string): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 10)
     const newUser = await prisma.user.create({
       data: {
