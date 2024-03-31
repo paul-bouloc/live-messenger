@@ -31,9 +31,10 @@
       "@models/*": ["models/*"],
       "@routers/*": ["routers/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@constants/*": ["constants/*"]
     }
   },
-  "include": ["src//*.ts", "src//*.json", ".env"],
+  "include": ["**/*"],
   "exclude": ["node_modules", "src/http", "src/logs", "src/tests"]
 }

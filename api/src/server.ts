@@ -1,9 +1,14 @@
-require("dotenv").config();
-
 import  app from ".";
-const PORT = process.env.PORT || 3000
+import * as http from 'http';
+import * as dotenv from 'dotenv'
+import validateEnv from '@utils/validateEnv'
 
-const errorHandler = (error:any) => {
+dotenv.config()
+validateEnv();
+
+const PORT = process.env.PORT
+
+const serverErrorHandler = (error:any) => {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -20,9 +25,13 @@ const errorHandler = (error:any) => {
   }
 };
 
-app.on('error', errorHandler);
-app.on('listening', () => {
+app.set('port', PORT);
+
+const server = http.createServer(app);
+
+server.on('error', serverErrorHandler);
+server.on('listening', () => {
   console.log(`Server listening on port ${PORT}`);
 })
 
-app.listen(PORT)
+server.listen(PORT)
