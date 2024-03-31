@@ -3,15 +3,18 @@ import cors from 'cors'
 import helmet from 'helmet'
 import appRouter from '@/routers'
 import errorHandler from '@middlewares/errorHandler'
-
+import cookieParser from 'cookie-parser'
+import extractUserFromJwt from '@/middlewares/extractUserFromJwt'
 
 const app = express(); 
 
-app.use(helmet()); 
-app.use(cors()); 
-app.use(express.json({ limit: '20kb' }))
-app.use(express.urlencoded({ extended: true }))
-app.use(appRouter)
-app.use(errorHandler)
+app.use(helmet())
+  .use(cors())
+  .use(express.json({ limit: '20kb' }))
+  .use(express.urlencoded({ extended: true }))
+  .use(cookieParser(process.env.COOKIE_SECRET_KEY))
+  .use(extractUserFromJwt)
+  .use(appRouter)
+  .use(errorHandler);
 
 export default app

@@ -1,11 +1,15 @@
 import express from 'express';
-import { register } from '@/controllers/authController';
+import { currentUser, login, register } from '@/controllers/authController';
 import tryCatch from '@utils/tryCatch'
 import schemaValidator from '@/middlewares/schemaValidator';
-import { authRegisterSchema } from '@/schemas/auth';
+import { authLoginSchema, authRegisterSchema } from '@/schemas/auth';
+import isAuthenticated from '@/middlewares/isAuthenticated';
 
 const authRouter = express.Router();
 
 authRouter.post('/register', schemaValidator(authRegisterSchema),tryCatch(register))
+authRouter.post('/login', schemaValidator(authLoginSchema),tryCatch(login))
+
+authRouter.get('/me', isAuthenticated, tryCatch(currentUser))
 
 export default authRouter;
