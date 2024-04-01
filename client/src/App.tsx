@@ -3,7 +3,6 @@ import Login from './pages/auth/login/login'
 import Register from './pages/auth/register/register'
 import Room from './pages/room/room'
 import Profile from './pages/profile/profile'
-import Friends from './pages/friends/friends'
 import AppLayout from './components/layouts/appLayout'
 import Home from './pages/home/home'
 import NotFound from './pages/404/notFound'
@@ -34,10 +33,6 @@ function App() {
           path: 'profile',
           element: <Profile/>
         },
-        {
-          path: 'friends',
-          element: <Friends/>
-        }
       ]
     },
     {

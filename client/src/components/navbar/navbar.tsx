@@ -1,8 +1,9 @@
 import { Send } from "lucide-react";
 import UserSelect from "./userSelect";
 import { Separator } from "../ui/separator";
-import NavBottomLinks from "./navBottomLinks";
 import RoomList from "./roomList";
+import LogoutButton from "./logoutButton";
+import NewRoomButton from "./newRoomButton";
 
 export default function Navbar() {
   return (
@@ -15,7 +16,10 @@ export default function Navbar() {
       <Separator/>
       <RoomList/>
       <Separator/>
-      <NavBottomLinks />
+      <div className="flex w-full gap-2">
+        <LogoutButton/>
+        <NewRoomButton/>
+      </div>
     </div>
   )
 }

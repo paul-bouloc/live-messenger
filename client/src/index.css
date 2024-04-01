@@ -7,7 +7,7 @@
   :root {
     --background: var(--slate-50);
     --foreground: var(--slate-900);
-    --muted: var(--slate-300);
+    --muted: var(--slate-200);
     --muted-foreground: var(--slate-800);
     --popover: var(--slate-50);
     --popover-foreground: var(--slate-900);
