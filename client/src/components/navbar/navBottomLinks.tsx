@@ -1,14 +1,37 @@
-import { LogOut, Users } from "lucide-react";
+import { Loader2, LogOut, Users } from "lucide-react";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "../ui/use-toast";
 
 export default function NavBottomLinks() {
 
   const navigate = useNavigate();
 
+  const logoutQuery = useMutation({
+    mutationFn: () => {
+      return axios.get(import.meta.env.VITE_API_URL + '/auth/logout', {
+        withCredentials: true
+      })
+        .then(res => res.data)
+    },
+    onError: () => {
+      toast({
+        title: "Erreur",
+        description: "Erreur lors de la déconnexion",
+        variant: "destructive"
+      })
+    },
+    onSuccess: () => {
+      navigate('auth')
+    }
+  
+  });
+
   const logout = () => {
-    console.log("logout")
+    logoutQuery.mutate();
   }
 
   return (
@@ -19,7 +42,9 @@ export default function NavBottomLinks() {
             <Button
               onClick={() => logout()}
               className="w-full hover:bg-red-100 hover:text-red-500" variant={"secondary"}>
-              <LogOut size={20} />
+                {
+                  logoutQuery.isPending ? <Loader2 size={20} className="animate-spin" /> : <LogOut size={20} />
+                }
             </Button>
           </TooltipTrigger>
           <TooltipContent>

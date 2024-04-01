@@ -10,7 +10,7 @@ export default function UserSelect() {
   return (
     <div
       onClick={() => navigate('/profile')}
-      className="flex items-center w-full gap-2 p-2 transition-all border shadow cursor-pointer rounded-2xl hover:bg-slate-200/40 shadow-gray-300">
+      className="flex items-center w-full gap-2 p-2 transition-all border cursor-pointer rounded-2xl hover:bg-slate-200/40 shadow-gray-300">
 
       <UserAvatar className="w-12 h-12" />
 
