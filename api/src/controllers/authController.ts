@@ -44,3 +44,10 @@ export const login = async (req, res, next) => {
 export const currentUser = async (req, res, next) => {
 	return res.status(200).json(req.user);
 };
+
+export const logout = async (req, res, next) => {
+	return res
+		.clearCookie("jwt")
+		.status(200)
+		.json({ message: "Logout successful" });
+}

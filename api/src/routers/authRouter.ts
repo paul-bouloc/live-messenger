@@ -1,5 +1,5 @@
 import express from 'express';
-import { currentUser, login, register } from '@/controllers/authController';
+import { currentUser, login, logout, register } from '@/controllers/authController';
 import tryCatch from '@utils/tryCatch'
 import schemaValidator from '@/middlewares/schemaValidator';
 import { authLoginSchema, authRegisterSchema } from '@/schemas/auth';
@@ -11,5 +11,6 @@ authRouter.post('/register', schemaValidator(authRegisterSchema),tryCatch(regist
 authRouter.post('/login', schemaValidator(authLoginSchema),tryCatch(login))
 
 authRouter.get('/me', isAuthenticated, tryCatch(currentUser))
+authRouter.get('/logout', tryCatch(logout))
 
 export default authRouter;
