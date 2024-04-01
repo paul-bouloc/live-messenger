@@ -8,6 +8,10 @@ import AppLayout from './components/layouts/appLayout'
 import Home from './pages/home/home'
 import NotFound from './pages/404/notFound'
 import AuthLayout from './components/layouts/authLayout'
+import AuthProvider from './context/authContext'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 function App() {
   
@@ -54,7 +58,11 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router}/>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <RouterProvider router={router}/>
+        </AuthProvider>
+      </QueryClientProvider>
     </>
   )
 }
