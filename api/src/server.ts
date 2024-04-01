@@ -2,6 +2,8 @@ import  app from ".";
 import * as http from 'http';
 import * as dotenv from 'dotenv'
 import validateEnv from '@utils/validateEnv'
+import { Server } from "socket.io";
+import { socketServer } from "./socket";
 
 dotenv.config()
 validateEnv();
@@ -28,6 +30,7 @@ const serverErrorHandler = (error:any) => {
 app.set('port', PORT);
 
 const server = http.createServer(app);
+socketServer(server);
 
 server.on('error', serverErrorHandler);
 server.on('listening', () => {

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "../ui/use-toast";
+import { socket } from "@/socket";
 
 export default function NavBottomLinks() {
 
@@ -24,6 +25,7 @@ export default function NavBottomLinks() {
       })
     },
     onSuccess: () => {
+      socket.disconnect()
       navigate('auth')
     }
   

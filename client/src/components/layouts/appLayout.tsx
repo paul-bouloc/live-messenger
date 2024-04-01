@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LoadingPage from "../loadingPage";
+import { socket } from "@/socket";
 
 export default function AppLayout() {
 
@@ -19,6 +20,7 @@ export default function AppLayout() {
         })
         .then((res) => {
           setUser(res.data)
+          socket.connect()
           return res.data
         })
         .catch(() => {
