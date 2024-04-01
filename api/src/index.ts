@@ -9,7 +9,10 @@ import extractUserFromJwt from '@/middlewares/extractUserFromJwt'
 const app = express(); 
 
 app.use(helmet())
-  .use(cors())
+  .use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  }))
   .use(express.json({ limit: '20kb' }))
   .use(express.urlencoded({ extended: true }))
   .use(cookieParser(process.env.COOKIE_SECRET_KEY))
