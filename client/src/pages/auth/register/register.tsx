@@ -32,14 +32,13 @@ export default function Register() {
     },
     onError: () => {
       toast({
-        title: "Erreur",
+        title: <span className="text-red-500">⛔ Erreur</span>,
         description: "Erreur lors de l'inscription",
-        variant: "destructive"
       })
     },
     onSuccess: (data) => {
       toast({
-        title: "Inscription réussie",
+        title: <span className="text-lime-500">✅ Inscription réussie</span>,
         description: "Bonjour " + data.user.name,
       })
       navigate('/')

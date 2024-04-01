@@ -25,14 +25,13 @@ export default function Login() {
     },
     onError: () => {
       toast({
-        title: "Erreur",
+        title: <span className="text-red-500">⛔ Erreur</span>,
         description: "Identifiants incorrects",
-        variant: "destructive"
       })
     },
     onSuccess: (data) => {
       toast({
-        title: "Connecté",
+        title: <span className="text-lime-500">✅ Connecté</span>,
         description: "Bonjour " + data.user.name,
       })
       navigate('/')

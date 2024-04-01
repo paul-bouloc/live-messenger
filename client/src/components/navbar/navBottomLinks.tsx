@@ -19,9 +19,8 @@ export default function NavBottomLinks() {
     },
     onError: () => {
       toast({
-        title: "Erreur",
+        title: <span className="text-red-500">⛔ Erreur</span>,
         description: "Erreur lors de la déconnexion",
-        variant: "destructive"
       })
     },
     onSuccess: () => {
