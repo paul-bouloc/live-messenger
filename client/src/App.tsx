@@ -10,6 +10,7 @@ import NotFound from './pages/404/notFound'
 import AuthLayout from './components/layouts/authLayout'
 import AuthProvider from './context/authContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from './components/ui/toaster'
 
 const queryClient = new QueryClient()
 
@@ -63,6 +64,7 @@ function App() {
           <RouterProvider router={router}/>
         </AuthProvider>
       </QueryClientProvider>
+      <Toaster />
     </>
   )
 }

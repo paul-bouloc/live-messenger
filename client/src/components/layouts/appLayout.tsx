@@ -7,17 +7,16 @@ import LoadingPage from "../loadingPage";
 
 export default function AppLayout() {
 
-  const {user, setUser} = useAuth();
+  const {setUser} = useAuth();
   const navigate = useNavigate();
-
-  console.log(user);
-  console.log(setUser);
 
   const {error, data, isFetching } = useQuery({
     queryKey: ['AppLayoutGetUser'],
     queryFn: () =>
       axios
-        .get(import.meta.env.VITE_API_URL + "/auth/me")
+        .get(import.meta.env.VITE_API_URL + "/auth/me", {
+          withCredentials: true
+        })
         .then((res) => {console.log(data);return res.data}),
       retry: false
   })
@@ -29,7 +28,7 @@ export default function AppLayout() {
     setUser(data);
     
     return (
-      <div className="flex w-full h-screen overflow-hidden flex-nowrap">
+      <div className="flex w-full h-screen overflow-hidden flex-nowrap text-sky-950">
         <Navbar/>
         <Outlet/>
       </div>
