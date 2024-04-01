@@ -11,9 +11,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const loginFormSchema = z.object({
-  email: z.string().email('Email incorrect').min(1,'Champ obligatoire'),
+  email: z.string().min(1,'Champ obligatoire').email('Email incorrect'),
   password: z.string().min(1,'Champ obligatoire')
-})
+}).required()
 
 export default function Login() {
 
@@ -31,7 +31,6 @@ export default function Login() {
       })
     },
     onSuccess: (data) => {
-      console.log(data)
       toast({
         title: "Connecté",
         description: "Bonjour " + data.user.name,
@@ -96,7 +95,7 @@ export default function Login() {
       </div>
       <span className="flex gap-1 mt-4">
         Pas encore de compte ?
-        <Link to="/auth/register" className="text-sky-500 hover:underline">S'inscrire</Link>
+        <Link to="/auth/register" className="font-semibold text-sky-500 hover:underline">S'inscrire</Link>
       </span>
     </>
   )
