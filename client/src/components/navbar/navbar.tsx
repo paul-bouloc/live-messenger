@@ -16,7 +16,7 @@ export default function Navbar() {
       <Separator/>
       <RoomList/>
       <Separator/>
-      <div className="flex w-full gap-2">
+      <div className="flex w-full gap-4">
         <LogoutButton/>
         <NewRoomButton/>
       </div>

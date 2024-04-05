@@ -35,6 +35,6 @@
       "@constants/*": ["constants/*"]
     }
   },
-  "include": ["**/*"],
+  "include": ["**/*", "../client/src/models/room.ts", "../client/src/models/message.ts"],
   "exclude": ["node_modules", "src/http", "src/logs", "src/tests"]
 }

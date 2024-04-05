@@ -1,4 +1,4 @@
-import { Loader2, LogOut } from "lucide-react";
+import { Loader2, Power } from "lucide-react";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,7 @@ export default function LogoutButton() {
             onClick={() => logout()}
             className="w-full hover:bg-red-100 hover:text-red-500" variant={"secondary"}>
               {
-                logoutQuery.isPending ? <Loader2 size={20} className="animate-spin" /> : <LogOut size={20} />
+                logoutQuery.isPending ? <Loader2 size={20} className="animate-spin" /> : <Power size={20} />
               }
           </Button>
         </TooltipTrigger>

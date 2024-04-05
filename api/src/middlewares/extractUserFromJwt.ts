@@ -3,7 +3,7 @@ import UserService from "@/services/userService"
 
 const extractUserFromJwt = async (req, res, next) => {
   try {
-    const token = req.signedCookies.jwt;
+    const token = req.cookies.jwt;
 
     if (!token) {
       return next();

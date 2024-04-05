@@ -2,8 +2,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 
 type Props = {
-  name?:string
-  className?: string
+  readonly name?:string
+  readonly className?: string
 }
 
 export default function UserAvatar({name, className}: Props) {

@@ -15,7 +15,7 @@ app.use(helmet())
   }))
   .use(express.json({ limit: '20kb' }))
   .use(express.urlencoded({ extended: true }))
-  .use(cookieParser(process.env.COOKIE_SECRET_KEY))
+  .use(cookieParser())
   .use(extractUserFromJwt)
   .use(appRouter)
   .use(errorHandler);

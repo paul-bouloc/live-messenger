@@ -2,7 +2,6 @@ import  app from ".";
 import * as http from 'http';
 import * as dotenv from 'dotenv'
 import validateEnv from '@utils/validateEnv'
-import { Server } from "socket.io";
 import { socketServer } from "./socket";
 
 dotenv.config()

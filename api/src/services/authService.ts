@@ -7,12 +7,12 @@ import bcrypt from 'bcrypt';
 export default class AuthService {
 
   static generateJwtToken(userId: string){
-    const jwtSecretKey = process.env.JWT_SECRET_KEY as string
+    const jwtSecretKey = process.env.JWT_SECRET_KEY
     return jwt.sign({userId},jwtSecretKey,{expiresIn: "7d"})
   }
 
   static verifyJwtToken(token: string){
-    const jwtSecretKey = process.env.JWT_SECRET_KEY as string
+    const jwtSecretKey = process.env.JWT_SECRET_KEY
     const payload = jwt.verify(token, jwtSecretKey) as JwtPayload
     if(payload){
       return payload.userId
