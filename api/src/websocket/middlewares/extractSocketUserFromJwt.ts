@@ -1,6 +1,6 @@
 import AuthService from '@/services/authService';
-import { PrismaClient, User } from '@prisma/client'
-const prisma = new PrismaClient()
+import UserService from '@/services/userService';
+import { User } from '@prisma/client'
 
 export const extractSocketUserFromJwt = async (socket, next) => {
   try {
@@ -16,11 +16,7 @@ export const extractSocketUserFromJwt = async (socket, next) => {
       return next(new Error('Socket authentication error'));
     }
 
-    const {password, ...user} = await prisma.user.findUnique({
-      where: {
-        id: userId
-      }
-    })
+    const {password, ...user} = await UserService.getUserById(userId);
 
     if (!user) {
       return next(new Error('Socket authentication error'));

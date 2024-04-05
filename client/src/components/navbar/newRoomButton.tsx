@@ -46,7 +46,7 @@ export default function NewRoomButton() {
 
 	function onSubmit(values: z.infer<typeof newRoomFormSchema>) {
     setIsFormPending(true);
-		socket.emit("new-room", values.email, (res:SocketResponse) => {
+		socket.emit("room:new", values.email, (res:SocketResponse) => {
 			setIsFormPending(false);
 			handleDialogOpening(false);
 			toast({

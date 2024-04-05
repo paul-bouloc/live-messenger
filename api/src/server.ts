@@ -2,7 +2,7 @@ import  app from ".";
 import * as http from 'http';
 import * as dotenv from 'dotenv'
 import validateEnv from '@utils/validateEnv'
-import { socketServer } from "./socket";
+import { socketServer } from "./websocket/socket";
 
 dotenv.config()
 validateEnv();

@@ -32,4 +32,83 @@ export default class RoomService {
     return rooms
   }
 
+  static async createRoom(userIds: string[]){
+    const room = await prisma.room.create({
+      data: {
+        users: {
+          connect: userIds.map(id => ({ id }))
+        }
+      }
+    })
+
+    return room
+  }
+
+  static async getRoomById(roomId: string){
+    const room = await prisma.room.findUnique({
+      where: {
+        id: roomId
+      },
+      include: {
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true
+          }
+        },
+        messages: {
+          orderBy: {
+            createdAt: 'asc'
+          },
+          take: 10
+        }
+      }
+    })
+
+    return room
+  }
+
+  static async getRoomByUsersIds(userIds: string[]){
+    const room = await prisma.room.findFirst({
+      where: {
+        users: {
+          every: {
+            id: {
+              in: userIds
+            }
+          }
+        }
+      }
+    })
+
+    return room
+  }
+
+  static async getRoomByUsersEmails(emails: string[]){
+    const room = await prisma.room.findFirst({
+      where: {
+        users: {
+          every: {
+            email: {
+              in: emails
+            }
+          }
+        }
+      }
+    })
+
+    return room
+  }
+
+  static async deleteRoom(roomId: string){
+    const room = await prisma.room.delete({
+      where: {
+        id: roomId
+      },
+    })
+
+    return room
+  }
+
 }
