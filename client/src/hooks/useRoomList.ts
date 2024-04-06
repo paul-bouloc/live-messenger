@@ -53,6 +53,6 @@ export function useRoomList() {
     addRoom: (room: Room) => dispatch({ type: "ADD_ROOM", payload: room }),
     addMultipleRooms: (rooms: Room[]) => dispatch({ type: "ADD_MULTIPLE_ROOMS", payload: rooms }),
     removeRoom: (roomId: string) => dispatch({ type: "REMOVE_ROOM", payload: roomId }),
-    updateLastMessage: (roomId: string, message: Message) => dispatch({ type: "UPDATE_LAST_MESSAGE", payload: { roomId, message } }),
+    updateLastMessage: (payload:{roomId: string, message: Message}) => dispatch({ type: "UPDATE_LAST_MESSAGE", payload }),
   };
 }

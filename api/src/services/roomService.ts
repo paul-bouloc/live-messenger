@@ -58,13 +58,24 @@ export default class RoomService {
           }
         },
         messages: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true
+              }
+            }
+          },
           orderBy: {
-            createdAt: 'asc'
+            createdAt: 'desc'
           },
           take: 10
         }
       }
     })
+
+    room.messages = room.messages.reverse()
 
     return room
   }

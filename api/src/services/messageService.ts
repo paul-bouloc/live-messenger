@@ -45,4 +45,23 @@ export default class MessageService {
   
       return message
     }
+
+    static async getMessageById(messageId: string){
+      const message = await prisma.message.findUnique({
+        where: {
+          id: messageId
+        },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
+          }
+        }
+      })
+
+      return message
+    }
 }

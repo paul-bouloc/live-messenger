@@ -26,19 +26,14 @@ export default function RoomList() {
   })
 
   useEffect(() => {
-
     socket.on("room:new", addRoom);
-    rooms.map(() => {
-      socket.on("message:new", (payload) => updateLastMessage(payload.roomId, payload.message))
-    })
+    socket.on("message:new", updateLastMessage)
     
     return () => {
       socket.off("room:new", addRoom);
-      rooms.map(() => {
-        socket.off("message:new", (payload) => updateLastMessage(payload.roomId, payload.message))
-      })
+      socket.off("message:new", updateLastMessage)
     };
-  }, [rooms, addRoom, updateLastMessage]);
+  }, [addRoom, updateLastMessage]);
   
   if(isFetching) return <LoadingBlock/>
   else if(error) return (
