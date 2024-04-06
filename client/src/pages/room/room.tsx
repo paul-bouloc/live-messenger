@@ -35,13 +35,13 @@ export default function RoomPage() {
   }
 
   if(isFetching) return <LoadingPage/>
-  if(error) return (
+  else if(error) return (
     <div className="flex flex-col items-center justify-center w-full h-full gap-4 p-8 font-semibold text-center rounded-md bg-slate-100">
       <Rss size={40} className="text-red-500"/>
       Impossible de charger<br/>la conversation
     </div>
   )
-  return (
+  else if(currentRoom) return (
     <div className="flex flex-col w-full h-screen bg-white">
       <RoomHeader user={getOtherUser(currentRoom.users)!}/>
       <MessageList messages={currentRoom.messages}/>
