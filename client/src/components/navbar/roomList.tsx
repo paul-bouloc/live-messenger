@@ -7,10 +7,11 @@ import axios from "axios";
 import { Rss } from "lucide-react";
 import LoadingBlock from "../loadingBlock";
 import { useRoomList } from "@/hooks/useRoomList";
+import { Message } from "@/models/message";
 
 export default function RoomList() {
 
-  const {rooms, addMultipleRooms, addRoom, updateLastMessage} = useRoomList();
+  const {rooms, addMultipleRooms, addRoom, updateLastMessage, sortRooms} = useRoomList();
 
   const { error, isFetching } = useQuery({
     queryKey: ['GetRooms'],
@@ -21,6 +22,7 @@ export default function RoomList() {
         })
         .then((res) => {
           addMultipleRooms(res.data.rooms)
+          sortRooms()
           return res.data
         })
   })
@@ -33,14 +35,19 @@ export default function RoomList() {
       }
     }
 
+    function handleNewMEssage(payload:{roomId:string, message:Message}) {
+      updateLastMessage(payload)
+      sortRooms()
+    }
+
     socket.on("room:new", handleNewRoom);
-    socket.on("message:new", updateLastMessage)
+    socket.on("message:new", handleNewMEssage)
     
     return () => {
       socket.off("room:new", handleNewRoom);
       socket.off("message:new", updateLastMessage)
     };
-  }, [updateLastMessage, addRoom, rooms]);
+  }, [updateLastMessage, addRoom, sortRooms, rooms]);
   
   if(isFetching) return <LoadingBlock/>
   else if(error) return (
