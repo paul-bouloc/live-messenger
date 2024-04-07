@@ -16,7 +16,6 @@ export const register = async (req, res, next) => {
 		return res
 			.cookie("jwt", token, {
 				httpOnly: true,
-				signed: true,
 				secure: process.env.NODE_ENV === "production",
 			})
 			.status(201)

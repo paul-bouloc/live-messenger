@@ -26,14 +26,21 @@ export default function RoomList() {
   })
 
   useEffect(() => {
-    socket.on("room:new", addRoom);
+    function handleNewRoom(payload:Room) {
+      if(!rooms.find(room => room.id === payload.id)){
+        socket.emit("room:join", payload.id)
+        addRoom(payload)
+      }
+    }
+
+    socket.on("room:new", handleNewRoom);
     socket.on("message:new", updateLastMessage)
     
     return () => {
-      socket.off("room:new", addRoom);
+      socket.off("room:new", handleNewRoom);
       socket.off("message:new", updateLastMessage)
     };
-  }, [addRoom, updateLastMessage]);
+  }, [updateLastMessage, addRoom, rooms]);
   
   if(isFetching) return <LoadingBlock/>
   else if(error) return (

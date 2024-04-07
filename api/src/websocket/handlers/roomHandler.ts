@@ -48,6 +48,11 @@ const roomHandler = (io: Server, socket: Socket) => {
     }
   }
 
+  const joinRoom = async (roomId:string) => {
+    socket.join(`room-${roomId}`)
+  }
+
+  socket.on("room:join", joinRoom);
   socket.on("room:new", createRoom);
 }
 

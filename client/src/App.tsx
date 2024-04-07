@@ -4,7 +4,7 @@ import Register from './pages/auth/register/register'
 import Profile from './pages/profile/profile'
 import AppLayout from './components/layouts/appLayout'
 import Home from './pages/home/home'
-import NotFound from './pages/404/notFound'
+import ErrorPage from './pages/error/error'
 import AuthLayout from './components/layouts/authLayout'
 import AuthProvider from './context/authContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -25,7 +25,7 @@ function App() {
     {
       path: '/',
       element: <AppLayout/>,
-      errorElement: <NotFound/>,
+      errorElement: <ErrorPage/>,
       children: [
         {
           path: '/',
@@ -44,7 +44,7 @@ function App() {
     {
       path: 'auth',
       element: <AuthLayout/>,
-      errorElement: <NotFound/>,
+      errorElement: <ErrorPage/>,
       children: [
         {
           path: 'register',

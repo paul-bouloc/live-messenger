@@ -1,7 +1,7 @@
 import { ShieldAlert } from "lucide-react";
 import { ErrorResponse, useRouteError } from "react-router-dom"
 
-export default function NotFound() {
+export default function ErorPage() {
 
   const error = useRouteError() as ErrorResponse;
   console.error(error)
