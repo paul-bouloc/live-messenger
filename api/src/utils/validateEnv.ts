@@ -7,6 +7,9 @@ const validateEnv = () =>{
     DATABASE_URL: str(),
     JWT_SECRET_KEY: str(),
     CLIENT_URL: str(),
+    REDIS_HOST: str(),
+    REDIS_PORT: port(),
+    REDIS_PW: str(),
   })
 }
 
