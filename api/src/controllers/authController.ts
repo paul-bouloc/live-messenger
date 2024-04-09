@@ -40,6 +40,12 @@ export const login = async (req, res, next) => {
 };
 
 export const currentUser = async (req, res, next) => {
+	if(!req.user) {
+		return res
+			.clearCookie("jwt")
+			.status(401)
+			.json({ message: "User not logged in" });
+	}
 	return res.status(200).json(req.user);
 };
 
