@@ -24,7 +24,14 @@ const extractUserFromJwt = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    next(error);
+    return res
+      .clearCookie("jwt")
+      .status(401)
+      .json({
+        name: error.name,
+        message: error.message,
+        code: 401,
+      });
   }
 }
 
